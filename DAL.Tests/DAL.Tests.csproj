@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAddressDalTest.cs" />
+    <Compile Include="UserCardInfoDalTest.cs" />
     <Compile Include="UserDalTests.cs" />
   </ItemGroup>
   <ItemGroup>
