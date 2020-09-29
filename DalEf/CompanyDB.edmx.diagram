@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="92e6aef8d4624764a51e1658512a8a7c" Name="Diagram1">
+        <EntityTypeShape EntityType="CompanyModel.City" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.Country" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.UserAddress" Width="1.5" PointX="6.125" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.UserCardInfo" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyModel.User" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="CompanyModel.FK__UserAddres__City__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK__UserAddre__Count__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK__UserAddre__UserI__4E53A1AA" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyModel.FK__UserCardI__UserI__531856C7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CompanyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="Country" Type="int" Nullable="false" />
+          <Property Name="City" Type="int" Nullable="false" />
+          <Property Name="PostalCode" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCardInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ValidMonth" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="ValidYear" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="CVC" Type="nvarchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="binary" MaxLength="64" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowInsertTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__UserAddre__Count__4F47C5E3">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddre__UserI__4E53A1AA">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddres__City__503BEA1C">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserCardI__UserI__531856C7">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserCardInfo" Type="Self.UserCardInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCardInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyModelStoreContainer">
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAddress" EntityType="Self.UserAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCardInfo" EntityType="Self.UserCardInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__UserAddre__Count__4F47C5E3" Association="Self.FK__UserAddre__Count__4F47C5E3">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddre__UserI__4E53A1AA" Association="Self.FK__UserAddre__UserI__4E53A1AA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddres__City__503BEA1C" Association="Self.FK__UserAddres__City__503BEA1C">
+            <End Role="City" EntitySet="City" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserCardI__UserI__531856C7" Association="Self.FK__UserCardI__UserI__531856C7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserCardInfo" EntitySet="UserCardInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserAddresses" Relationship="Self.FK__UserAddres__City__503BEA1C" FromRole="City" ToRole="UserAddress" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserAddresses" Relationship="Self.FK__UserAddre__Count__4F47C5E3" FromRole="Country" ToRole="UserAddress" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="Country" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <Property Name="PostalCode" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="City1" Relationship="Self.FK__UserAddres__City__503BEA1C" FromRole="UserAddress" ToRole="City" />
+          <NavigationProperty Name="Country1" Relationship="Self.FK__UserAddre__Count__4F47C5E3" FromRole="UserAddress" ToRole="Country" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserAddre__UserI__4E53A1AA" FromRole="UserAddress" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserCardInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ValidMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ValidYear" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CVC" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserCardI__UserI__531856C7" FromRole="UserCardInfo" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="Binary" MaxLength="64" FixedLength="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RowInsertTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserAddresses" Relationship="Self.FK__UserAddre__UserI__4E53A1AA" FromRole="Users" ToRole="UserAddress" />
+          <NavigationProperty Name="UserCardInfoes" Relationship="Self.FK__UserCardI__UserI__531856C7" FromRole="Users" ToRole="UserCardInfo" />
+        </EntityType>
+        <Association Name="FK__UserAddres__City__503BEA1C">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddre__Count__4F47C5E3">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddre__UserI__4E53A1AA">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserCardI__UserI__531856C7">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserCardInfo" Type="Self.UserCardInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCardInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="UserAddresses" EntityType="Self.UserAddress" />
+          <EntitySet Name="UserCardInfoes" EntityType="Self.UserCardInfo" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__UserAddres__City__503BEA1C" Association="Self.FK__UserAddres__City__503BEA1C">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="UserAddress" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddre__Count__4F47C5E3" Association="Self.FK__UserAddre__Count__4F47C5E3">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="UserAddress" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddre__UserI__4E53A1AA" Association="Self.FK__UserAddre__UserI__4E53A1AA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserAddress" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserCardI__UserI__531856C7" Association="Self.FK__UserCardI__UserI__531856C7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserCardInfo" EntitySet="UserCardInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CompanyModelStoreContainer" CdmEntityContainer="CompanyEntities">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="CompanyModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="City1" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="CompanyModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Country1" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAddresses">
+            <EntityTypeMapping TypeName="CompanyModel.UserAddress">
+              <MappingFragment StoreEntitySet="UserAddress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCardInfoes">
+            <EntityTypeMapping TypeName="CompanyModel.UserCardInfo">
+              <MappingFragment StoreEntitySet="UserCardInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="ValidMonth" ColumnName="ValidMonth" />
+                <ScalarProperty Name="ValidYear" ColumnName="ValidYear" />
+                <ScalarProperty Name="CVC" ColumnName="CVC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CompanyModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="RowInsertTime" ColumnName="RowInsertTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
