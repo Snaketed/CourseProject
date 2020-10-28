@@ -23,7 +23,7 @@ namespace DalEf.Concrete
         {
             using (var entities = new CompanyEntities())
             {
-                var m = entities.UserAddresses.SingleOrDefault(mm => mm.Id == id);
+                var m = entities.UserAddresses.SingleOrDefault(mm => mm.UserId == id);
 
                 return _mapper.Map<UserAddressDTO>(m);
             }

@@ -50,31 +50,12 @@ namespace DAL.Tests
             Assert.IsNull(user);
         }
 
-        [Test]
-        public void CreateTest()
-        {
-            UserDalEf dal = new UserDalEf(mapper);
-            var result = dal.CreateUser(new UsersDTO
-            {
-                FirstName = "Maks",
-                LastName = "Bahlai",
-                Email = "maks44753@gmail.com",
-                PhoneNumber = "380680025266",
-                Gender = "Male",
-                Password = Encoding.ASCII.GetBytes("dasdfas"),
-                RowInsertTime = DateTime.UtcNow
-
-        });
-            Assert.IsTrue(result.Id != 0, "returned ID should be more than zero");
-
-        }
-
 
 
         [Test]
         public void GetAllTest()
         {
-            
+               
             UserDalEf dal = new UserDalEf(mapper);
             var users = dal.GetAllUsers();
             Assert.AreEqual(1, users.Count(x => x.FirstName == "Maksym"));

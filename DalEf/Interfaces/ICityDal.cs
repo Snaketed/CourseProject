@@ -10,5 +10,6 @@ namespace DAL.Interfaces
     public interface ICityDal
     {
         List<CityDTO> GetAllCity();
+        CityDTO GetCityById(long id);
     }
 }

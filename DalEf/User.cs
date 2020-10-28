@@ -27,7 +27,10 @@ namespace DalEf
         public string Email { get; set; }
         public byte[] Password { get; set; }
         public string PhoneNumber { get; set; }
+        public System.Guid Salt { get; set; }
         public string Gender { get; set; }
+
+        public string Keyword { get; set; }
         public System.DateTime RowInsertTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

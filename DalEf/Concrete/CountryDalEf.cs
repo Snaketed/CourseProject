@@ -24,5 +24,15 @@ namespace DalEf.Concrete
 
             }
         }
+
+        public CountryDTO GetCountryById(long id)
+        {
+            using (var entities = new CompanyEntities())
+            {
+                var m = entities.Countries.SingleOrDefault(mm => mm.CountryId == id);
+
+                return _mapper.Map<CountryDTO>(m);
+            }
+        }
     }
 }

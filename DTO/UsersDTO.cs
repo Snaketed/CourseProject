@@ -14,8 +14,10 @@ namespace DTO
         public string LastName { get; set; }
         public string Email { get; set; }
         public byte[] Password { get; set; }
+        public System.Guid Salt{ get; set; }
         public string PhoneNumber { get; set; }
         public string Gender { get; set; }
+        public string Keyword { get; set; }
         public DateTime RowInsertTime { get; set; }
 
     }

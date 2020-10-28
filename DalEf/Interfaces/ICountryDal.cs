@@ -10,5 +10,6 @@ namespace DAL.Interfaces
     public interface ICountryDal
     {
         List<CountryDTO> GetAllCountry();
+        CountryDTO GetCountryById(long id);
     }
 }

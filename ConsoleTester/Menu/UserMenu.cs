@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -52,8 +53,9 @@ namespace ConsoleTester.Menu
         private static void CreateUser(UserDalEf dal)
         {
 
-
+            Guid salt = Guid.NewGuid();
             UsersDTO m = new UsersDTO();
+            m.Salt = salt;
             Console.Write("Enter your first name : ");
             m.FirstName = Console.ReadLine();
             Console.Write("Enter your last name : ");
@@ -65,11 +67,17 @@ namespace ConsoleTester.Menu
             Console.Write("Enter your phone Gender : ");
             m.Gender = Console.ReadLine();
             Console.Write("Enter your phone Password : ");
-            m.Password = Encoding.ASCII.GetBytes(Console.ReadLine());
+            string password = Console.ReadLine();
+            m.Password = hash(password, salt.ToString());
             m.RowInsertTime = DateTime.UtcNow;
-            m = dal.CreateUser(m);
+            //m = dal.CreateUser(m);
             Console.WriteLine();
 
+        }
+        private static byte[] hash(string password, string salt)
+        {
+            var alg = SHA512.Create();
+            return alg.ComputeHash(Encoding.UTF8.GetBytes(password + salt));
         }
         private static void ShowAllUser(UserDalEf dal)
         {

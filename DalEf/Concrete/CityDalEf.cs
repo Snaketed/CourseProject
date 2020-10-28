@@ -21,10 +21,19 @@ namespace DalEf.Concrete
             using (var e = new CompanyEntities())
             {
                 return _mapper.Map<List<CityDTO>>(e.Cities.ToList());
-
             }
         }
-       
-       
+
+        public CityDTO GetCityById(long id)
+        {
+            using (var entities = new CompanyEntities())
+            {
+                var m = entities.Cities.SingleOrDefault(mm => mm.CityId == id);
+
+                return _mapper.Map<CityDTO>(m);
+            }
+        }
+
+
     }
 }
